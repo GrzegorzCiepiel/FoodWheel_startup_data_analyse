@@ -51,3 +51,14 @@ plt.ylabel('Average Order Amount')
 plt.title('Average Order Amount Over Time')
 plt.show()
 plt.clf()
+
+customer_amount = orders.groupby('customer_id').price.sum().reset_index()
+
+print(customer_amount)
+
+plt.hist(customer_amount.price, bins=40, range=(0, 200))
+plt.xlabel('Total Spent')
+plt.ylabel('Number of Customers')
+plt.show()
+plt.clf()
+
