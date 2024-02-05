@@ -33,7 +33,21 @@ orders = pd.read_csv('orders.csv')
 orders['month'] = orders.date.apply(lambda x: x.split('-')[0])
 print(orders.head())
 print('\n')
-print(orders.groupby('month').price.sum())
-print(orders.groupby('month').price.mean())
-std_order = orders.groupby('month').price.std()
+print(orders.groupby('month').price.sum().reset_index())
+mean_orders = orders.groupby('month').price.mean().reset_index()
+std_order = orders.groupby('month').price.std().reset_index()
 print(std_order)
+
+
+ax = plt.subplot()
+plt.bar(range(len(mean_orders)), mean_orders.price,
+        yerr=std_order.price,
+        capsize=5,
+        color='purple'
+        )
+ax.set_xticks(range(len(mean_orders)))
+ax.set_xticklabels(['April', 'May', 'June', 'July', 'August', 'September'])
+plt.ylabel('Average Order Amount')
+plt.title('Average Order Amount Over Time')
+plt.show()
+plt.clf()
