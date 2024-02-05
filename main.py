@@ -59,6 +59,22 @@ print(customer_amount)
 plt.hist(customer_amount.price, bins=40, range=(0, 200))
 plt.xlabel('Total Spent')
 plt.ylabel('Number of Customers')
+plt.title("Each client's expenses")
 plt.show()
 plt.clf()
 
+#Create a visualization to display the restaurant count for each neighborhood.
+
+restaurant_count = restaurants.groupby('neighborhood').name.count().reset_index()
+print(restaurant_count)
+
+
+plt.figure()
+ax = plt.subplot()
+plt.bar(restaurant_count.neighborhood, restaurant_count.name)
+ax.set_xticks(range(7))
+ax.set_xticklabels(restaurant_count.neighborhood, rotation=30)
+plt.ylabel('Restaurant Count', fontsize=10)
+plt.title('Neighborhood by Restaurant Count', fontsize=12)
+plt.show()
+plt.clf()
