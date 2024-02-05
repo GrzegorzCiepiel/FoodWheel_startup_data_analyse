@@ -26,3 +26,14 @@ plt.pie(cuisine_counts,
 plt.axis('equal')
 plt.show()
 plt.clf()
+
+orders = pd.read_csv('orders.csv')
+# print(orders.head())
+# Group the orders data by month.
+orders['month'] = orders.date.apply(lambda x: x.split('-')[0])
+print(orders.head())
+print('\n')
+print(orders.groupby('month').price.sum())
+print(orders.groupby('month').price.mean())
+std_order = orders.groupby('month').price.std()
+print(std_order)
