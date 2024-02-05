@@ -24,6 +24,8 @@ plt.pie(cuisine_counts,
         autopct='%1.2f%%',
         labels = rest_unique)
 plt.axis('equal')
+plt.title('Different types of cuisines available on FoodWheel')
+plt.savefig('pie.png')
 plt.show()
 plt.clf()
 
@@ -38,7 +40,7 @@ mean_orders = orders.groupby('month').price.mean().reset_index()
 std_order = orders.groupby('month').price.std().reset_index()
 print(std_order)
 
-
+plt.figure()
 ax = plt.subplot()
 plt.bar(range(len(mean_orders)), mean_orders.price,
         yerr=std_order.price,
@@ -49,17 +51,19 @@ ax.set_xticks(range(len(mean_orders)))
 ax.set_xticklabels(['April', 'May', 'June', 'July', 'August', 'September'])
 plt.ylabel('Average Order Amount')
 plt.title('Average Order Amount Over Time')
+plt.savefig('bar1.png')
 plt.show()
 plt.clf()
 
 customer_amount = orders.groupby('customer_id').price.sum().reset_index()
 
 print(customer_amount)
-
+plt.figure()
 plt.hist(customer_amount.price, bins=40, range=(0, 200))
 plt.xlabel('Total Spent')
 plt.ylabel('Number of Customers')
 plt.title("Each client's expenses")
+plt.savefig('hist.png')
 plt.show()
 plt.clf()
 
@@ -76,5 +80,6 @@ ax.set_xticks(range(7))
 ax.set_xticklabels(restaurant_count.neighborhood, rotation=30)
 plt.ylabel('Restaurant Count', fontsize=10)
 plt.title('Neighborhood by Restaurant Count', fontsize=12)
+plt.savefig('bar2.png')
 plt.show()
 plt.clf()
